@@ -48,4 +48,28 @@
 
 ---
 
+### [2026-05-26] Session 3 — Scene 搭建 + 调试
+
+**完成了什么**
+- 目录结构重组：Scripts / Scene / Notes / _Project 分离，ARCHITECTURE.md 同步更新
+- Scene `Mainperformance.unity` 创建完成，全部 GameObject 搭好
+- 修复回声问题：`audioSource.volume = 0f` 静音输出，FFT 数据不受影响
+- `PerformanceDirector` 加 null 检查，防止 SceneStateManager 未初始化时崩溃
+- `TunnelGenerator` 改用 `sharedMesh`，防止 Unity 内部复制 mesh 导致变形失效
+- `TunnelDeformer` 加 debug 日志（每秒打印 Bass 值）
+- `AudioAnalyzer` 移除 `DontDestroyOnLoad`（单场景工具不需要，且导致 Editor 多次 Play 时 Instance 失效）
+- 麦克风采集正常：`[AudioAnalyzer] Using mic: 麦克风阵列 (Realtek(R) Audio)`
+- 摄像机前进正常，回声已消除，键盘切换待验证
+
+**未解决问题**
+- `TunnelDeformer` 仍报 `AudioAnalyzer.Instance is null`，移除 DontDestroyOnLoad 后未能验证是否解决
+- 隧道变形尚未跑通
+
+**下一 session 调试方案**
+- 如果 Instance 仍为 null：改用 Inspector 直接引用替代 static Instance，彻底绕开初始化顺序问题
+  - TunnelDeformer 加 `[SerializeField] AudioAnalyzer audioAnalyzer;`，在 Inspector 手动拖入
+- 确认 Bass 实际数值，按需调整 bassScale（FFT raw 值极小，可能需要 500~2000）
+
+---
+
 <!-- 最新的放最上面 -->

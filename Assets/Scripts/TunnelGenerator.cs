@@ -14,7 +14,7 @@ public class TunnelGenerator : MonoBehaviour
     void Awake()
     {
         Mesh = BuildMesh();
-        GetComponent<MeshFilter>().mesh = Mesh;
+        GetComponent<MeshFilter>().sharedMesh = Mesh;
     }
 
     Mesh BuildMesh()

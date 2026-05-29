@@ -9,6 +9,7 @@ public class TunnelDeformer : MonoBehaviour
 
     TunnelGenerator tunnel;
     Vector3[] deformedVerts;
+    float debugTimer;
 
     void Awake()
     {
@@ -22,9 +23,20 @@ public class TunnelDeformer : MonoBehaviour
 
     void Update()
     {
-        if (AudioAnalyzer.Instance == null) return;
+        if (AudioAnalyzer.Instance == null)
+        {
+            Debug.LogWarning("[TunnelDeformer] AudioAnalyzer.Instance is null");
+            return;
+        }
 
         float bass = AudioAnalyzer.Instance.Bass;
+
+        debugTimer += Time.deltaTime;
+        if (debugTimer >= 1f)
+        {
+            debugTimer = 0f;
+            Debug.Log($"[TunnelDeformer] Bass={bass:F6}  displacement={bass * bassScale:F4}");
+        }
         var   base_ = tunnel.BaseVertices;
         int   segments = tunnel.Mesh.vertexCount / (base_.Length / base_.Length); // 用原始顶点数
 

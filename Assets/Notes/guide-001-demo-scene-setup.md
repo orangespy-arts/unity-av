@@ -79,13 +79,13 @@ CameraRail 参数：
 按 Play，对着麦克风说话或拍手。
 
 **正常现象：**
-- Console：`[AudioAnalyzer] Using mic: 你的麦克风名字`
-- 隧道内壁可见，随低频鼓动
-- 摄像机向前穿行，80 单位后循环
+- Console：`[AudioAnalyzer] Using mic: 你的麦克风名字` 
+- 隧道内壁可见，随低频鼓动 //可见，但我没有理解低频鼓动是什么意思，但是他会返回回声，我要的效果并不是在unity里面返回回声，而是里面的物体随着跳动 
+- 摄像机向前穿行，80 单位后循环 
 
 **隧道不可见：** 确认 Material 已挂，或将 Camera Position Z 改为 `5` 向里移动后再观察。
 
-**键盘控制：**
+**键盘控制：**//键盘控制不可用
 - `1` → Organic
 - `2` → Architecture
 - `3` → Cosmos

@@ -23,9 +23,7 @@ public class AudioAnalyzer : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null) { Destroy(gameObject); return; }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
         audioSource = GetComponent<AudioSource>();
         StartCoroutine(InitMicrophone());
     }
@@ -43,6 +41,7 @@ public class AudioAnalyzer : MonoBehaviour
         audioSource.loop = true;
         yield return new WaitUntil(() => Microphone.GetPosition(mic) > 0);
         audioSource.Play();
+        audioSource.volume = 0f;
     }
 
     void Update()
